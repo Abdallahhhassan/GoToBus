@@ -13,6 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import ejb.Search;
 import ejb.Trip;
 import services.Tripservice;
 @Stateless
@@ -33,6 +34,13 @@ public class RestTrip {
 	public List<Trip> getall()
 	{
 		return tripService.getAllTrips();
+	}
+	@POST
+	@Path("/searchtrips")
+	public List<Trip>  addsearch(Search s1)
+	{
+		
+		return tripService.Search(s1);
 	}
 	
 }
