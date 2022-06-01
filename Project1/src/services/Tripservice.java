@@ -1,8 +1,11 @@
 package services;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import ejb.Trip;
 import ejb.User;
@@ -26,6 +29,12 @@ public class Tripservice {
 			}
 	        
 	    }
+	public List<Trip> getAllTrips() {
+		  TypedQuery<Trip> query = entityManager.createQuery("SELECT t FROM Trip t", Trip.class);
+		  	List<Trip> trips = query.getResultList();
+
+			 return trips;
+	}
 	
 
 }
