@@ -1,11 +1,15 @@
 package services;
 
+
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import ejb.Trip;
 import ejb.User;
@@ -36,5 +40,16 @@ public class Tripservice {
 			 return trips;
 	}
 	
+	public Date convertfromStringtoDate(String s)
+	{
+		 try {
+			Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(s);
+			return date1;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }
