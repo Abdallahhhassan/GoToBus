@@ -1,6 +1,8 @@
 package services;
 import javax.ejb.Stateless;
 import java.util.List;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -30,6 +32,31 @@ public class Userservice {
 	{
 		return entityManager.find(User.class, id);
 	}
+	public Response login(User u)
+	{
+		ResponseBuilder builder=Response.noContent();
+		boolean x=false;
+		for(int i=0;i<getAllPersons().size();i++)
+		{
+			if(u.getUsername().equals(getAllPersons().get(i).getUsername())&&u.getPassword().equals(getAllPersons().get(i).getPassword()))
+			{
+				x=true;
+				builder = Response.ok();
+			}
+			
+		}
+		if(x==true)
+		{
+			return builder.build();
+		}
+		else
+		{
+			builder=Response.status(Response.Status.BAD_REQUEST);
+			return builder.build();
+		}
+	}
+	
+	
 	
 	
 }

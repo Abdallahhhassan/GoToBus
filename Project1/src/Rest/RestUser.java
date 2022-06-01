@@ -3,7 +3,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-
+import javax.ws.rs.core.Response;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
@@ -41,6 +41,12 @@ public class RestUser {
 	public User getID (@PathParam("id")int id)
 	{
 		return userService.findUserbyid(id);
+	}
+	@POST
+	@Path("/login")
+	public Response  login(User u)
+	{
+		return userService.login(u);
 	}
 	
 	
