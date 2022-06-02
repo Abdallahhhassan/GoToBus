@@ -3,7 +3,8 @@ package ejb;
 import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
-
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -25,7 +26,15 @@ public class Trip implements Serializable {
 	private String departure_time;
 	private String arrival_time;
 	private static final long serialVersionUID = 1L;
-	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="UserXTrip",
+		joinColumns=@JoinColumn(name="trip_id"),
+	    inverseJoinColumns=@JoinColumn(name="user_id"))
+	private Set <User> users = new HashSet<User>();
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
 
 	
 	public Trip() {
@@ -72,6 +81,10 @@ public class Trip implements Serializable {
 
 	public void setArrival_time(String arrival_time) {
 		this.arrival_time = arrival_time;
+	}
+	public void adduser(User u)
+	{
+		this.users.add(u);
 	}
 	
 			

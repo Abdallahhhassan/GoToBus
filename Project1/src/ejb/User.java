@@ -3,7 +3,8 @@ package ejb;
 import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
-
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -25,6 +26,16 @@ public class User implements Serializable {
 	private String role;
 	
 	private static final long serialVersionUID = 1L;
+	@ManyToMany(mappedBy = "users",fetch=FetchType.EAGER)
+	private Set <Trip> trips = new HashSet<Trip>();
+	
+	public Set<Trip> getTrips() {
+		return trips;
+	}
+
+	public void setTrips(Set<Trip> trips) {
+		this.trips = trips;
+	}
 
 	public User() {
 		super();
@@ -60,6 +71,10 @@ public class User implements Serializable {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public void addtrip(Trip t)
+	{
+		this.trips.add(t);
 	}
 	
    

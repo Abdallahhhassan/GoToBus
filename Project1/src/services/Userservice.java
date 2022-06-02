@@ -7,7 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-
+import ejb.Booking;
+import ejb.Trip;
 import ejb.User;
 
 @Stateless
@@ -54,6 +55,26 @@ public class Userservice {
 			builder=Response.status(Response.Status.BAD_REQUEST);
 			return builder.build();
 		}
+	}
+	public String book(Booking b)
+	{
+		entityManager.persist(b);
+		User user = entityManager.find(User.class, b.getUser_id());
+		Trip trip = entityManager.find(Trip.class, b.getTrip_id());
+		
+		if(trip.getAvailable_seats()>0)
+		{
+			user.addtrip(trip);
+			trip.adduser(user);
+			trip.setAvailable_seats(trip.getAvailable_seats()-1);
+			return "success";
+			
+		}
+		else
+		{
+			return "false";
+		}
+		
 	}
 	
 	
