@@ -3,8 +3,7 @@ package ejb;
 import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
-import java.time.LocalDateTime;
-import java.util.Date;
+
 
 import javax.persistence.*;
 
@@ -23,7 +22,9 @@ public class Notifications implements Serializable {
 	private String message;
 	private String  notification_datetime;
 	private static final long serialVersionUID = 1L;
-
+	@ManyToOne
+	@JoinColumn(name="userid")
+	private User user;
 
 	
 
@@ -31,6 +32,10 @@ public class Notifications implements Serializable {
 		super();
 	}   
 	
+	public void setUser(User user) {
+			this.user = user;
+		}
+
 
 	public void setNotification_id(Integer notification_id) {
 		this.notification_id = notification_id;

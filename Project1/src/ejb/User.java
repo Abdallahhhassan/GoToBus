@@ -24,6 +24,8 @@ public class User implements Serializable {
 	private String username;
 	private String full_name;
 	private String role;
+	@OneToMany(mappedBy = "user",fetch=FetchType.EAGER)		
+	private Set <Notifications> notifications = new HashSet<Notifications>();
 	
 	private static final long serialVersionUID = 1L;
 	@ManyToMany(mappedBy = "users",fetch=FetchType.EAGER)
@@ -35,6 +37,13 @@ public class User implements Serializable {
 
 	public void setTrips(Set<Trip> trips) {
 		this.trips = trips;
+	}
+	public Set<Notifications> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(Set<Notifications> notifications) {
+		this.notifications = notifications;
 	}
 
 	public User() {
@@ -71,6 +80,10 @@ public class User implements Serializable {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public void addnotification(Notifications n)
+	{
+		this.notifications.add(n);
 	}
 	public void addtrip(Trip t)
 	{
