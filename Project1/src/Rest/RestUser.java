@@ -1,9 +1,11 @@
 package Rest;
 import java.util.List;
+import java.util.Set;
 
+import javax.ws.rs.core.Response;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.core.Response;
+
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
@@ -11,7 +13,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-
+import ejb.Booking;
+import ejb.Trip;
 import ejb.User;
 import services.Userservice;
 
@@ -47,6 +50,19 @@ public class RestUser {
 	public Response  login(User u)
 	{
 		return userService.login(u);
+	}
+	@POST
+	@Path("/booktrip")
+	public String  book(Booking b)
+	{
+		return userService.book(b);
+	}
+	
+	@GET
+	@Path("/viewtrips/{id}")
+	public Set<Trip>  getbooking(@PathParam("id")int id)
+	{
+		return userService.getbooking(id);
 	}
 	
 	

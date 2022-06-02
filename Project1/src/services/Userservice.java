@@ -1,6 +1,8 @@
 package services;
 import javax.ejb.Stateless;
 import java.util.List;
+import java.util.Set;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.persistence.EntityManager;
@@ -75,6 +77,11 @@ public class Userservice {
 			return "false";
 		}
 		
+	}
+	public Set<Trip>  getbooking(int id)
+	{
+		User user = entityManager.find(User.class, id);
+		return user.getTrips();
 	}
 	
 	
